@@ -1,0 +1,6 @@
+name: tynet
+build:
+  cmake: ./
+  kconfig: ./Kconfig
+  depends:
+    - typlatform

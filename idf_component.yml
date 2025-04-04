@@ -1,0 +1,16 @@
+# SPDX-FileCopyrightText: Copyright 2025 Clever Design (Switzerland) GmbH
+# SPDX-License-Identifier: Apache-2.0
+
+version: 1.0.4
+description: "TyNet Library - persist global app settings"
+license: "Apache-2.0"
+repository: "https://github.com/tylibs/tynet"
+dependencies:
+  idf: ">=5.0"
+  typlatform:
+    version: ">=1.0"
+    path: ../typlatform
+files:
+  exclude:
+    - "docs"
+    - "docs/**/*"

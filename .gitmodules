@@ -1,0 +1,6 @@
+[submodule "lib/tycommon"]
+	path = lib/tycommon
+	url = git@github.com:tylibs/tycommon.git
+[submodule "lib/lwip"]
+	path = lib/lwip
+	url = https://github.com/lwip-tcpip/lwip.git
