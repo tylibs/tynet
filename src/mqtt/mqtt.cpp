@@ -1,8 +1,9 @@
-#include <tynet/platform/mqtt.hpp>
+#include <tynet/mqtt/mqtt.hpp>
 
+namespace ty {
 size_t Mqtt::printDriverInfo(Print &out) const
 {
-    auto   self  = static_cast<const Mqtt *>(this);
+    // auto   self  = static_cast<const Mqtt *>(this);
     size_t bytes = 0;
     // bytes += out.print(",");
     // bytes += out.print(linkSpeed());
@@ -18,3 +19,4 @@ size_t Mqtt::printDriverInfo(Print &out) const
     // bytes += out.printf(",ADDR:0x%lX", phyAddr());
     return bytes;
 }
+} // namespace ty

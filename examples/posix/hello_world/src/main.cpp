@@ -7,14 +7,16 @@
  *   TyNet simplest example: Hello World
  */
 
+#include <etl/string.h>
 #include <pthread.h>
-#include <stdio.h>
 #include <ty/instance.h>
 #include <ty/logging.h>
 #include <unistd.h>
-#include "tynet/platform/mqtt.hpp"
+#include "tynet/mqtt/mqtt.hpp"
 
-static const char *kLogModule = "HelloWorld";
+static const char    *kLogModule    = "HelloWorld";
+const etl::string<32> kMqttUrl      = "mqtt://localhost:1883";
+const etl::string<32> kMqttClientId = "mqtt_client";
 
 /*****************************************************************************/
 // just as a hint, but better not to pack, because this object only lives once
@@ -24,10 +26,11 @@ extern "C" int main(void)
     tyInstance *instance;
     tyLogInfo(kLogModule, "Starting TyNet example");
     instance  = tyInstanceInitSingle();
-    auto mqtt = Mqtt::create(*instance);
+    auto mqtt = ty::Mqtt::create(*instance);
     if (mqtt.has_value())
     {
-        mqtt->get()->Init();
+        ty::Mqtt::MqttConfiguration mqttConfig = {kMqttUrl, kMqttClientId};
+        mqtt->get()->Init(mqttConfig);
     }
 
     while (true)

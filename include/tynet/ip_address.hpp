@@ -102,7 +102,7 @@ public:
     void       to_ip_addr_t(ip_addr_t *addr) const;
     IPAddress &from_ip_addr_t(const ip_addr_t *addr);
 #if CONFIG_LWIP_IPV6
-    esp_ip6_addr_type_t addr_type() const;
+    // esp_ip6_addr_type_t addr_type() const;
 #endif
     uint8_t zone() const { return (type() == IPv6) ? _zone : 0; }
     size_t  printTo(Print &p, bool includeZone) const;

@@ -1,18 +1,27 @@
 #include "tynet/tynet-config.h"
 
+#include <etl/string.h>
 #include <ty/instance.h>
 #include "tynet/connection.hpp"
 
 #include "etl/memory.h"
 #include "etl/optional.h"
 
-#if CONFIG_TYNET_ETH_ENABLED
+#if CONFIG_TYNET_MQTT_ENABLED
 
-#ifndef _ETH_H_
-#define _ETH_H_
+#ifndef _TY_MQTT_HPP_
+#define _TY_MQTT_HPP_
 
+namespace ty {
 class Mqtt : public Connection
 {
+public:
+    struct MqttConfiguration
+    {
+        const etl::istring &serverUri;
+        const etl::istring &clientId;
+    };
+
 public:
     Mqtt();
     ~Mqtt();
@@ -22,10 +31,11 @@ public:
     static auto create(tyInstance const &) -> etl::optional<etl::unique_ptr<Mqtt>>;
     static auto destroy(etl::unique_ptr<Mqtt> &) -> void;
 
-    void Init();
+    void Init(MqttConfiguration &aConfiguration);
 
 private:
 };
+} // namespace ty
 
-#endif /* _ETH_H_ */
+#endif /* _TY_MQTT_HPP_ */
 #endif /* CONFIG_ETH_ENABLED */

@@ -10,38 +10,33 @@
 #include <ty/logging.h>
 #include <ty/platform/toolchain.h>
 #include <zephyr/kernel.h>
-#include "tynet/platform/settings.h"
 
-static const char *kLogModule = "HelloWorld";
+#include <etl/string.h>
+#include <ty/instance.h>
+#include <ty/logging.h>
 
-/*****************************************************************************/
-// just as a hint, but better not to pack, because this object only lives once
-TY_TOOL_PACKED_BEGIN
-struct AppPersistentSettings
-{
-    int a;
-    int b;
-} TY_TOOL_PACKED_END;
+#include "tynet/mqtt/mqtt.hpp"
 
-// keep the settings in global scope but not accessible (in C this would be static)
-// the Settings will be injected in each module to support testing setups
-namespace {
-AppPersistentSettings mAppPersistentSettings = {1, 2};
-}
+static const char    *kLogModule    = "HelloWorld";
+const etl::string<32> kMqttUrl      = "mqtt://localhost:1883";
+const etl::string<32> kMqttClientId = "mqtt_client";
 
 extern "C" int main(void)
 {
     tyInstance *instance;
     tyLogInfo(kLogModule, "Starting TyNet example");
+    instance  = tyInstanceInitSingle();
+    auto mqtt = ty::Mqtt::create(*instance);
+    if (mqtt.has_value())
+    {
+        ty::Mqtt::MqttConfiguration mqttConfig = {kMqttUrl, kMqttClientId};
+        mqtt->get()->Init(mqttConfig);
+    }
 
-    instance = tyInstanceInitSingle();
-    // Initialize the settings subsystem
-    tyPlatSettingsInit(instance, NULL, 0);
-    tyPlatSettingsSet(instance, 1, (uint8_t *)&mAppPersistentSettings, sizeof(mAppPersistentSettings));
     while (true)
     {
         // next event in 1 second
-        k_sleep(K_SECONDS(1));
+        sleep(1);
     }
     tyInstanceFinalize(instance);
     return 0;

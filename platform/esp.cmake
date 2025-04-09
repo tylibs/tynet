@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.20)
 
-idf_component_register(PRIV_REQUIRES nvs_flash esp_partition)
+idf_component_register()
 
 ty_library_named(tynet)
 ty_library_include_directories_public(${PROJECT_DIR}/include)

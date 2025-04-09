@@ -1,7 +1,6 @@
 #ifndef TY_CONNECTION_H_
 #define TY_CONNECTION_H_
 
-#include "ip_address.hpp"
 #include <ty/printable.hpp>
 #include "etl/string.h"
 
