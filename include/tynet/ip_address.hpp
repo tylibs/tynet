@@ -110,7 +110,7 @@ public:
     friend class UDP;
     friend class Client;
     friend class Server;
-    friend class EthernetClass;
+    friend class Connection;
     friend class DhcpClass;
     friend class DNSClient;
 

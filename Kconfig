@@ -6,11 +6,11 @@ config TYNET
 
 if TYNET
 menu "TyNet configuration"
-config TYNET_ETH_ENABLED
-	bool "Enable Ethernet"
+config TYNET_MQTT_ENABLED
+	bool "Enable MQTT support"
 	default "y"
 	help
-		Selects whether Ethernet support is enabled.
+		Selects whether Mqtt support is enabled.
 
 
 config TYNET_LOG

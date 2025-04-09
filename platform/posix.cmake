@@ -15,4 +15,8 @@ ty_library_include_directories_public(
   ${PROJECT_DIR}/lib/lwip/contrib/ports/unix/posixlib
   ${PROJECT_DIR}/lib/lwip/contrib/ports/unix/port/include)
 
+# include MQTT library
+find_package(PahoMqttCpp REQUIRED)
+ty_library_link_libraries(PahoMqttCpp::paho-mqttpp3)
+
 add_subdirectory(${PROJECT_DIR}/src)

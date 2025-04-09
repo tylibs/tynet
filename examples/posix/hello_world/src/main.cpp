@@ -12,7 +12,7 @@
 #include <ty/instance.h>
 #include <ty/logging.h>
 #include <unistd.h>
-#include "tynet/platform/ethernet.hpp"
+#include "tynet/platform/mqtt.hpp"
 
 static const char *kLogModule = "HelloWorld";
 
@@ -23,8 +23,13 @@ extern "C" int main(void)
 {
     tyInstance *instance;
     tyLogInfo(kLogModule, "Starting TyNet example");
-    instance = tyInstanceInitSingle();
-    Ethernet::create(*instance);
+    instance  = tyInstanceInitSingle();
+    auto mqtt = Mqtt::create(*instance);
+    if (mqtt.has_value())
+    {
+        mqtt->get()->Init();
+    }
+
     while (true)
     {
         // next event in 1 second
